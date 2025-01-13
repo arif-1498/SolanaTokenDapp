@@ -10,10 +10,12 @@ import { PhantomWalletName } from "@solana/wallet-adapter-wallets";
 //);
 import { useWallet} from "@solana/wallet-adapter-react";
 const WalletConn = () => {
-
-    const { select, connect, disconnect, publicKey }=useWallet();
+    
+  
+    const { select, connect, disconnect, publicKey, wallet}=useWallet();
     select(PhantomWalletName);
-    console.log(publicKey);
+    console.log(wallet);
+    console.log(publicKey?.toString());
   return (
     <div className="flex justify-between p-4 border bg-gray-300">
       <div className="flex items-center space-x-4'">

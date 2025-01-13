@@ -1,5 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
+import { getProgram } from "../../components/AnchorProgram";
 const Walletbuttondynamic = dynamic(
   async () =>
     (await import("@solana/wallet-adapter-react-ui")).WalletMultiButton,
@@ -7,6 +8,11 @@ const Walletbuttondynamic = dynamic(
 );
 
 export default function Home() {
+  //const program=getProgram();
+  //console.log(program);
+
+  const provider=getProgram();
+  console.log("the provider is here:", provider,"founds it ")
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="w-full max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg">
