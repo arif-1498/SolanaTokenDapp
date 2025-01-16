@@ -8,7 +8,7 @@ import {
 import { WalletAdapterNetwork,  } from "@solana/wallet-adapter-base";
 import { WalletModalProvider,  } from "@solana/wallet-adapter-react-ui";
 import { clusterApiUrl } from "@solana/web3.js";
-import {  SolflareWalletAdapter, SolongWalletAdapter} from "@solana/wallet-adapter-wallets";
+import {  SolflareWalletAdapter, SolongWalletAdapter,} from "@solana/wallet-adapter-wallets";
 require("@solana/wallet-adapter-react-ui/styles.css");
 export default function WalletProviderContext({
     children,
