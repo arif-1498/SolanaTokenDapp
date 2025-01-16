@@ -1,31 +1,35 @@
-'use client';
-import React, {useMemo} from  'react'
-import {SolflareWalletAdapter, BitgetWalletAdapter, PhantomWalletName, PhantomWalletAdapter}  from '@solana/wallet-adapter-wallets';
-import{ConnectionProvider, WalletProvider, WalletProviderProps} from '@solana/wallet-adapter-react';
-import  {WalletModal, WalletModalProvider, WalletMultiButton} from '@solana/wallet-adapter-react-ui';
-import {clusterApiUrl} from '@solana/web3.js'
-import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
-
-
-const WalletContextProvider=({children }:{children: React.ReactNode})=>{
-
-    const network =WalletAdapterNetwork.Devnet;
-    const endpoint=clusterApiUrl(network);
-
-    const wallets= useMemo(()=>[ new PhantomWalletAdapter
-    ], []);
-    
-return(
-    <ConnectionProvider endpoint={endpoint}>
-        <WalletProvider wallets={wallets} autoConnect={false}>
-            <WalletModalProvider>
-                {children }
-            </WalletModalProvider>
+"use client";
+ 
+import React, { useMemo } from "react";
+import {
+  ConnectionProvider,
+  WalletProvider,
+} from "@solana/wallet-adapter-react";
+import { WalletAdapterNetwork,  } from "@solana/wallet-adapter-base";
+import { WalletModalProvider,  } from "@solana/wallet-adapter-react-ui";
+import { clusterApiUrl } from "@solana/web3.js";
+import {  SolflareWalletAdapter, SolongWalletAdapter} from "@solana/wallet-adapter-wallets";
+require("@solana/wallet-adapter-react-ui/styles.css");
+export default function WalletProviderContext({
+    children,
+  }: {
+    children: React.ReactNode;
+  }) {
+    const network = WalletAdapterNetwork.Devnet;
+    const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+    const wallets = useMemo(
+      () => [
+       new SolflareWalletAdapter(), 
+       new SolongWalletAdapter(), 
+      ],
+      [network],
+    );
+   
+    return (
+      <ConnectionProvider endpoint={endpoint}>
+        <WalletProvider wallets={wallets} autoConnect>
+          <WalletModalProvider>{children}</WalletModalProvider>
         </WalletProvider>
-    </ConnectionProvider>
-)
-
-
-}
-
-export default WalletContextProvider;
+      </ConnectionProvider>
+    );
+  }
